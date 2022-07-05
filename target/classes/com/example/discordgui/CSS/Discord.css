@@ -1,7 +1,59 @@
 .menuBackGround{
-    -fx-background-color: rgb(58, 57, 57);
+    -fx-background-color: rgb(30,30,33);
 }
 .headerBackGround{
-    -fx-background-color: rgb(40,40,40);
+    -fx-background-color: rgb(20,20,20);
+}
+
+.DynamicMenuItem{
+    -fx-pref-width: 400;
+    -fx-pref-height: 40;
+    -fx-background-color: rgb(40,40,43);
+    -fx-background-radius: 30 30 30 30;
+    -fx-text-fill: #d7d7d7;
+    -fx-font-size: 19;
+    -fx-border-radius: 30 30 30 30;
+    -fx-border-width: 1;
+    -fx-border-color: rgb(0,0,0,0);
+}
+
+.DynamicMenuItem:hover {
+    -fx-border-color: #0057ea;
+}
+
+.DynamicFormField {
+    -fx-pref-width: 350;
+    -fx-pref-height: 40;
+    -fx-border-color: #d7d7d7;
+    -fx-background-radius: 30 30 30 30;
+    -fx-border-radius: 30 30 30 30;
+    -fx-text-fill: Black;
+}
+
+.ChatTextField {
+    -fx-border-color: #d7d7d7;
+    -fx-background-radius: 30 30 30 30;
+    -fx-border-radius: 30 30 30 30;
+    -fx-text-fill: Black;
+}
+
+.ChatButon {
+    -fx-background-color: #113d86;
+    -fx-background-radius: 17.5 17.5 17.5 17.5;
+    -fx-border-radius: 17.5 17.5 17.5 17.5;
+    -fx-border-width: 1;
+    -fx-border-color: WHITE;
+}
+
+.ChatButon:hover {
+    -fx-background-color: #1650b0;
+}
+
+.ChatBackGround {
+    -fx-background-color: rgb(30,30,33);
+}
+
+.ChatMessagesBackGround {
+    -fx-background-color: rgb(50, 50, 53);
 }
 

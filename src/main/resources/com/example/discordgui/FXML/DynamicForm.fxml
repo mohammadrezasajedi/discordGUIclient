@@ -7,11 +7,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="450.0" styleClass="menuBackGround" stylesheets="@../CSS/Discord.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.discordgui.controller.DinamicMenuController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="450.0" styleClass="menuBackGround" stylesheets="@../CSS/Discord.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.discordgui.controller.DynamicFormController">
    <top>
       <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="450.0" styleClass="headerBackGround" BorderPane.alignment="CENTER">
          <children>
-            <Text fill="#d7d7d7" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose one item">
+            <Text fx:id="header" fill="#d7d7d7" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Enter Your UserName">
                <font>
                   <Font size="25.0" />
                </font>
@@ -22,7 +22,7 @@
    <center>
       <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="450.0" styleClass="menuBackGround" BorderPane.alignment="CENTER">
          <content>
-            <VBox fx:id="menu" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="435.0" spacing="20.0" styleClass="menuBackGround" />
+            <VBox fx:id="box" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="435.0" spacing="20.0" styleClass="menuBackGround" />
          </content>
       </ScrollPane>
    </center>

@@ -12,15 +12,20 @@ public class ClientController {
     private BufferedReader reader;
     private BufferedWriter writer;
     private UI ui;
+    private ClientNotificationThread notificationThread;
 
     public ClientController() throws IOException {
         this.socket = new Socket("localhost",8989);
+        this.notificationThread = new ClientNotificationThread();
         new Socket("localhost",8888);
         reader=new BufferedReader(new InputStreamReader(socket.getInputStream()));
         writer=new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
     }
 
     public void start(){
+        Thread thread = new Thread(notificationThread);
+        thread.start();
+
         System.out.println("Connected");
         try {
             String str = methodRead();
@@ -28,34 +33,29 @@ public class ClientController {
             boolean end=false;
             while (!end) {
                 Command command = Command.valueOfLabel(methodRead());
-                String respond = null;
                 if (command == null) {
                     continue;
              }
 
                 switch (command) {
                     case GETUSERNAME: {
-//                    respond = UI.getUserName();
+                        ui.getInfo("Please enter your user name","User Name");
                         break;
                     }
-                    case GETUSERNAMEAGAIN: {
-//                    respond = UI.getUserName(methodRead());
+                    case GETUSERNAMEAGAIN:
+                    case GETPASSWORDAGAIN:
+                    case GETEMAILAGAIN:
+                    case GETROLENAMEAGAIN:
+                    case GETCHANNELNAMEAGAIN: {
+                        ui.getAgain(methodRead());
                         break;
                     }
                     case GETPASSWORD: {
-//                    respond = UI.getPassword();
-                        break;
-                    }
-                    case GETPASSWORDAGAIN: {
-//                    respond = UI.getPassword(methodRead());
+                        ui.getInfo("Please enter your password","Password");
                         break;
                     }
                     case GETEMAIL: {
-//                    respond = UI.getEmail();
-                        break;
-                    }
-                    case GETEMAILAGAIN: {
-//                    respond = UI.getEmail(methodRead());
+                        ui.getInfo("Please enter your e-mail","E-Mail");
                         break;
                     }
                     case PRINT: {
@@ -70,51 +70,55 @@ public class ClientController {
                         }
                         ui.showMenu(items);
                         break;
+                    } case PRINTWELLCOME:{
+                        ui.welcome(methodRead());
+                        break;
+                    }
+                    case RESETMENU:{
+                        ui.resetMenu();
+                        break;
                     }
                     case CREATEFRIEND: {
-//                    respond = UI.getCreateFriend();
+                        ui.getInfo("Please enter desired user name","User Name");
                         break;
                     }
                     case ENTERCHATMODE: {
-//                    chatMode();
+                        ui.chatMode();
                         break;
                     }
                     case GETSERVERNAME: {
-//                    methodWrite(UI.getServerName());
-//                    respond = UI.getWelcome();
+                        ui.getInfo("Please enter your server name","Server Name");
                         break;
                     }
+                    case GETWELLCOME:{
+                        ui.getInfo("Please enter your welcome message","Message");
+                    }
                     case GETSERVERNAMEAGAIN: {
-//                    methodWrite(UI.getServerName(methodRead()));
-//                    respond = UI.getWelcome();
+                        ui.getAgain(methodRead());
                         break;
                     }
                     case GETROLENAME: {
-//                    respond = UI.getRoleName();
-                        break;
-                    }
-                    case GETROLENAMEAGAIN: {
-//                    respond = UI.getRoleName(methodRead());
+                        ui.getInfo("Please enter your Role name","Role Name");
                         break;
                     }
                     case GETCHANNELNAME: {
-//                    respond = UI.getChannelName();
-                        break;
-                    }
-                    case GETCHANNELNAMEAGAIN: {
-//                    respond = UI.getChannelName(methodRead());
+                        ui.getInfo("Please enter your Channel name","Channel Name");
                         break;
                     }
                     case GETPHONE: {
-//                    respond = UI.getPhone();
+                        ui.getInfo("Please enter your Phone number","Phone Number");
                         break;
                     }
                     case GETPHONEAGAIN: {
-//                    respond = UI.getPhone(methodRead());
+                        ui.getAgain(str);
                         break;
                     }
                     case GETPROFILEPICTURE: {
 //                    fileStream.sendFile(UI.getProfilePicture());
+                        break;
+                    }
+                    case GETTABLE:{
+                        ui.Table(Integer.parseInt(methodRead()));
                         break;
                     }
                     case EXIT: {

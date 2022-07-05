@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -16,7 +17,14 @@ public class Client extends Application {
         stage.setTitle("Discord");
         stage.setScene(scene);
         clientController.setStage(stage);
-        clientController.start();
+//        stage.initStyle(StageStyle.UNDECORATED);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                clientController.start();
+            }
+        });
+        thread.start();
     }
 
     public static void main(String[] args) throws IOException {

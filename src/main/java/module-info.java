@@ -12,4 +12,7 @@ module com.example.discordgui {
 
     opens com.example.discordgui to javafx.fxml;
     exports com.example.discordgui;
+
+    opens com.example.discordgui.controller to javafx.fxml;
+    exports com.example.discordgui.controller;
 }

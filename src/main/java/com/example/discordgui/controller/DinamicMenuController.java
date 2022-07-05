@@ -26,19 +26,17 @@ public class DinamicMenuController {
         this.items = items;
         for (int i = 0; i < items.size(); i++) {
             Button button=new Button();
-            button.setText(items.get(i));
+            button.setText(items.get(i).split("\\.")[1]);
             button.setId(String.valueOf(i+1));
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    Button button1=(Button) actionEvent.getSource();
-                    try {
-                        ui.methodWrite(button1.getId());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+            button.setOnAction(actionEvent -> {
+                Button button1=(Button) actionEvent.getSource();
+                try {
+                    ui.methodWrite(button1.getId());
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             });
+            button.getStyleClass().add("DynamicMenuItem");
             menu.getChildren().add(button);
         }
     }
