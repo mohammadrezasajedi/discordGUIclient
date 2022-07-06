@@ -73,3 +73,15 @@
     -fx-font-size: 20px;
 }
 
+.fileField {
+    -fx-border-color: #d7d7d7;
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-radius: 15 15 15 15;
+    -fx-text-fill: Black;
+}
+
+.fileButton {
+    -fx-background-color: White;
+    -fx-background-radius: 15 15 15 15;
+}
+

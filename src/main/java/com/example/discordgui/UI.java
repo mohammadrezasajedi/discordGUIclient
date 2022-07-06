@@ -90,14 +90,39 @@ public class UI {
         changeStage(scene);
     }
 
-    public File getProfilePicture() {
-        return null;
+    public void getProfilePicture() throws IOException {
+        dynamicFormController = null;
+        FXMLLoader fxmlLoader = new FXMLLoader(Client.class.getResource("FXML/SendPicture.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        SendPictureController sendPictureController = fxmlLoader.getController();
+        sendPictureController.init(this,null);
+        changeStage(scene);
     }
 
     private void changeStage (Scene scene){
         Platform.runLater(() -> stage.setScene(scene));
     }
 
+
+    public void sendFile (File file) {
+        clientController.getFileStreamThread().sendFile(file);
+    }
+
+    public void receiveFile(File file){
+        clientController.getFileStreamThread().receiveFile(file);
+    }
+
+    public String receiveFileName() throws IOException {
+        return clientController.getFileStreamThread().methodRead();
+    }
+
+    public void sendPopUp (String title,String desc){
+        try {
+            clientController.getNotificationThread().showPopup(title, desc);
+        } catch (IOException | InterruptedException e){
+            e.printStackTrace();
+        }
+    }
     public String methodRead () throws IOException {
         return clientController.methodRead();
     }

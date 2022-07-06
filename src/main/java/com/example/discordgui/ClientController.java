@@ -113,7 +113,7 @@ public class ClientController {
                         break;
                     }
                     case GETPROFILEPICTURE: {
-                    fileStreamThread.sendFile(ui.getProfilePicture());
+                    ui.getProfilePicture();
                         break;
                     }
                     case GETTABLE:{
@@ -129,13 +129,18 @@ public class ClientController {
                 }
             }
         } catch (IOException e){
-            e.printStackTrace();
             System.err.println("Server Unreachable!");
             System.exit(-1);
         }
     }
 
+    public ClientNotificationThread getNotificationThread() {
+        return notificationThread;
+    }
 
+    public ClientFileStreamThread getFileStreamThread() {
+        return fileStreamThread;
+    }
 
     public String methodRead () throws IOException {
         String str = reader.readLine();

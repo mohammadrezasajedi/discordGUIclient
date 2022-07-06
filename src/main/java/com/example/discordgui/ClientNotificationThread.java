@@ -14,28 +14,36 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class ClientNotificationThread implements Runnable{
     private Socket socket;
-    private ObjectInputStream in;
+    private BufferedReader in;
 
     public ClientNotificationThread() throws IOException {
         socket = new Socket("localhost",8787);
-        in = new ObjectInputStream(socket.getInputStream());
+        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
 
     @Override
     public void run() {
         try {
-            String com = in.readUTF();
-            while (!com.equals("exit")){
-                showPopup(in.readUTF(),in.readUTF());
-                in.readUTF();
+            String com = methodRead();
+            while (com!= null && !com.equals("exit")){
+                showPopup(methodRead(),methodRead());
+                methodRead();
             }
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
 
+    public String methodRead () throws IOException {
+        String str = in.readLine();
+        while (str != null && str.equals("")){
+            str = in.readLine();
+        }
+        return str;
+    }
 
-    private void showPopup (String title,String desc) throws IOException, InterruptedException {
+
+    public synchronized void showPopup (String title,String desc) throws IOException, InterruptedException {
         FXMLLoader fxmlLoader = new FXMLLoader(Client.class.getResource("FXML/PopUpDialoge.fxml"));
         Scene scene = new Scene(fxmlLoader.load(),400,150);
         PopUpController controller = fxmlLoader.getController();
