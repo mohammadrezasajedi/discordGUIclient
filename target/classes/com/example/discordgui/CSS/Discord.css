@@ -57,3 +57,19 @@
     -fx-background-color: rgb(50, 50, 53);
 }
 
+.tableItem {
+    -fx-pref-width: 400;
+    -fx-pref-height: 100;
+    -fx-background-color: rgb(40,40,43);
+    -fx-background-radius: 10 10 10 10;
+}
+
+.tableItem:hover{
+    -fx-background-color: rgb(60,60,66);
+}
+
+.tableText {
+    -fx-fill: #d7d7d7;
+    -fx-font-size: 20px;
+}
+

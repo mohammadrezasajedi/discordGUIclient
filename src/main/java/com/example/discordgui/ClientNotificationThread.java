@@ -44,8 +44,8 @@ public class ClientNotificationThread implements Runnable{
         AtomicReference<Stage> stage = new AtomicReference<>();
         Platform.runLater(() -> {
             stage.set(new Stage());
-            stage.get().setX(Screen.getPrimary().getVisualBounds().getMinX()+Screen.getPrimary().getVisualBounds().getWidth()-400);
-            stage.get().setY(Screen.getPrimary().getVisualBounds().getMinY()+Screen.getPrimary().getVisualBounds().getHeight()-150);
+            stage.get().setX(Screen.getPrimary().getVisualBounds().getMinX() + Screen.getPrimary().getVisualBounds().getWidth() - 400);
+            stage.get().setY(Screen.getPrimary().getVisualBounds().getMinY() + Screen.getPrimary().getVisualBounds().getHeight() - 150);
             stage.get().initStyle(StageStyle.UNDECORATED);
             stage.get().setAlwaysOnTop(true);
             stage.get().setScene(scene);

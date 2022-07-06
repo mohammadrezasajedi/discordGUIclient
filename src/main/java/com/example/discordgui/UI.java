@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -72,6 +73,7 @@ public class UI {
         chatPageController.setUi(this);
         chatPageController.init(null,methodRead());
         changeStage(scene);
+        chatPageController.start();
     }
 
     public void Table (int num) throws IOException {
@@ -88,6 +90,10 @@ public class UI {
         changeStage(scene);
     }
 
+    public File getProfilePicture() {
+        return null;
+    }
+
     private void changeStage (Scene scene){
         Platform.runLater(() -> stage.setScene(scene));
     }
@@ -99,5 +105,4 @@ public class UI {
     public void methodWrite (String str) throws IOException {
         clientController.methodWrite(str);
     }
-
 }

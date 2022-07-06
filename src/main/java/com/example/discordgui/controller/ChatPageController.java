@@ -16,7 +16,8 @@ import java.io.IOException;
 
 public class ChatPageController {
 
-    UI ui;
+    private UI ui;
+    private ReadThread readThread;
 
 
     @FXML
@@ -49,8 +50,11 @@ public class ChatPageController {
             this.avatar.setImage(new Image(avatar.getAbsolutePath()));
         }
         this.name.setText(name);
-        Thread thread = new Thread(new ReadThread(ui,this));
-        thread.start();
+        readThread = new ReadThread(ui,this);
+    }
+
+    public void start() {
+        readThread.run();
     }
 
     public void newMessage (String str) {

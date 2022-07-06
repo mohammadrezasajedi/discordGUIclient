@@ -13,11 +13,12 @@ public class ClientController {
     private BufferedWriter writer;
     private UI ui;
     private ClientNotificationThread notificationThread;
+    private ClientFileStreamThread fileStreamThread;
 
     public ClientController() throws IOException {
         this.socket = new Socket("localhost",8989);
         this.notificationThread = new ClientNotificationThread();
-        new Socket("localhost",8888);
+        this.fileStreamThread = new ClientFileStreamThread();
         reader=new BufferedReader(new InputStreamReader(socket.getInputStream()));
         writer=new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
     }
@@ -46,7 +47,8 @@ public class ClientController {
                     case GETPASSWORDAGAIN:
                     case GETEMAILAGAIN:
                     case GETROLENAMEAGAIN:
-                    case GETCHANNELNAMEAGAIN: {
+                    case GETCHANNELNAMEAGAIN:
+                    case GETSERVERNAMEAGAIN: {
                         ui.getAgain(methodRead());
                         break;
                     }
@@ -92,9 +94,6 @@ public class ClientController {
                     }
                     case GETWELLCOME:{
                         ui.getInfo("Please enter your welcome message","Message");
-                    }
-                    case GETSERVERNAMEAGAIN: {
-                        ui.getAgain(methodRead());
                         break;
                     }
                     case GETROLENAME: {
@@ -114,7 +113,7 @@ public class ClientController {
                         break;
                     }
                     case GETPROFILEPICTURE: {
-//                    fileStream.sendFile(UI.getProfilePicture());
+                    fileStreamThread.sendFile(ui.getProfilePicture());
                         break;
                     }
                     case GETTABLE:{
