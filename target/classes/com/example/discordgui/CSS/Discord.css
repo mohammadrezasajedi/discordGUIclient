@@ -85,3 +85,54 @@
     -fx-background-radius: 15 15 15 15;
 }
 
+.toggleMid {
+    -fx-background-color: rgb(67, 67, 70);
+    -fx-text-fill: #d7d7d7;
+    -fx-background-radius: 0 0 0 0;
+    -fx-bottom: 0 0 0 0;
+    -fx-border-color: Black;
+    -fx-border-width: 1;
+}
+
+.toggleRight {
+    -fx-background-color: rgb(67, 67, 70);
+    -fx-text-fill: #d7d7d7;
+    -fx-background-radius: 0 5 5 0;
+    -fx-border-color: Black;
+    -fx-border-width: 1;
+    -fx-border-radius: 0 5 5 0;
+}
+
+.toggleLeft {
+    -fx-background-color: rgb(67, 67, 70);
+    -fx-text-fill: #d7d7d7;
+    -fx-background-radius: 5 0 0 5;
+    -fx-border-color: Black;
+    -fx-border-width: 1;
+    -fx-border-radius: 5 0 0 5;
+}
+
+.toggleMid:selected {
+    -fx-background-color: rgb(32, 32, 33);
+}
+
+.toggleLeft:selected {
+    -fx-background-color: rgb(32, 32, 33);
+ }
+
+.toggleRight:selected {
+    -fx-background-color: rgb(32, 32, 33);
+}
+
+.toggleMid:hover {
+    -fx-background-color: rgb(47, 47, 49);
+}
+
+.toggleLeft:hover {
+    -fx-background-color: rgb(47, 47, 49);
+}
+
+.toggleRight:hover {
+    -fx-background-color: rgb(47, 47, 49);
+}
+
