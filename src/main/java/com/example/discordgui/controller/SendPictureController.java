@@ -17,12 +17,12 @@ public class SendPictureController {
 
     private UI ui;
 
-    public void init (UI ui, Image image){
+    public void init (UI ui, File pic){
         this.ui = ui;
         loading.setVisible(false);
         path.setText("");
-        if (image != null){
-            prof.setImage(image);
+        if (pic != null){
+            prof.setImage(new Image(pic.toURI().toString()));
         }
     }
 

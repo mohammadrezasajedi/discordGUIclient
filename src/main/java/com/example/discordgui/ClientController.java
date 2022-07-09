@@ -48,7 +48,8 @@ public class ClientController {
                     case GETEMAILAGAIN:
                     case GETROLENAMEAGAIN:
                     case GETCHANNELNAMEAGAIN:
-                    case GETSERVERNAMEAGAIN: {
+                    case GETSERVERNAMEAGAIN:
+                    case GETPHONEAGAIN: {
                         ui.getAgain(methodRead());
                         break;
                     }
@@ -61,7 +62,7 @@ public class ClientController {
                         break;
                     }
                     case PRINT: {
-//                    UI.print(methodRead());
+                        ui.sendPopUp("INFO",methodRead());
                         break;
                     }
                     case SHOWMENU: {
@@ -108,10 +109,6 @@ public class ClientController {
                         ui.getInfo("Please enter your Phone number","Phone Number");
                         break;
                     }
-                    case GETPHONEAGAIN: {
-                        ui.getAgain(str);
-                        break;
-                    }
                     case GETPROFILEPICTURE: {
                     ui.getProfilePicture();
                         break;
@@ -120,8 +117,26 @@ public class ClientController {
                         ui.Table(Integer.parseInt(methodRead()));
                         break;
                     }
+                    case PROFILEPAGE:{
+                        ui.ProfilePage();
+                        break;
+                    }
+                    case SHOWFRIENDSCHART_ALL:
+                    case SHOWFRIENDSCHART_ONLINE:
+                    case SHOWFRIENDSCHART_BLOCKED:
+                    case SHOWFRIENDSCHART_PENDING:{
+                        ui.showFriendsChart();
+                        break;
+                    }
+                    case LOGIN:{
+                        ui.login();
+                        break;
+                    }
+                    case SIGNUP:{
+                        ui.signUp();
+                        break;
+                    }
                     case EXIT: {
-//                    UI.exit();
                         System.exit(0);
                         break;
                     }

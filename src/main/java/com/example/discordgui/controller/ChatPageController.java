@@ -109,7 +109,7 @@ public class ChatPageController {
 
     public void init (File avatar,String name){
         if (avatar != null && avatar.exists()){
-            this.avatar.setImage(new Image(avatar.getAbsolutePath()));
+            this.avatar.setImage(new Image(avatar.toURI().toString()));
         }
         this.name.setText(name);
         readThread = new ReadThread(ui,this);

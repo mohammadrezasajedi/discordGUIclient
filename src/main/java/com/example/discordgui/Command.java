@@ -25,6 +25,13 @@ public enum Command{
     RESETMENU("resetMenu"),
     PRINTWELLCOME("PrintWellCome"),
     GETTABLE("getTable"),
+    SHOWFRIENDSCHART_ONLINE("ShowFriendsChart_Online"),
+    SHOWFRIENDSCHART_ALL("ShowFriendsChart_All"),
+    SHOWFRIENDSCHART_PENDING("ShowFriendsChart_Pending"),
+    SHOWFRIENDSCHART_BLOCKED("ShowFriendsChart_Blocked"),
+    PROFILEPAGE("ProfilePage"),
+    SIGNUP("SignUp"),
+    LOGIN("login"),
     EXIT("exit")
     ;
 
