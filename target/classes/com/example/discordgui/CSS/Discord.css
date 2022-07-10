@@ -136,3 +136,13 @@
     -fx-background-color: rgb(47, 47, 49);
 }
 
+.notif {
+    -fx-fill: WHITE;
+    -fx-font-size: 15;
+}
+.notifArea {
+    -fx-background-color: #e86161;
+    -fx-background-radius: 10 10 10 10 ;
+    -fx-pref-width: 20;
+    -fx-pref-height: 20;
+}
