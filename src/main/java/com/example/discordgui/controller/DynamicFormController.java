@@ -2,6 +2,7 @@ package com.example.discordgui.controller;
 
 import com.example.discordgui.UI;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -22,6 +23,12 @@ public class DynamicFormController {
 
     @FXML
     private Text header;
+
+
+    @FXML
+    void exit(ActionEvent event) throws IOException {
+        ui.methodWrite("exit");
+    }
 
     public void init (String header,String req){
         this.header.setText(header);
@@ -68,7 +75,7 @@ public class DynamicFormController {
 
     public void again (String header) {
         this.header.setText(header);
-        this.header.setStyle("-fx-text-fill: #770000");
+        this.header.setStyle("-fx-fill: #770000");
         last.setText("");
     }
 

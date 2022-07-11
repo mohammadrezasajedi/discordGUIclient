@@ -69,7 +69,85 @@ public class ShowTableController {
 
                 table.getChildren().add(reqCreateBox(user, status,pics.get(s)));
             }
+        } else if (mode.equals("inv")){
+            header.setText("Invite your Friends");
+            for (int i = 0; i < strings.size(); i++) {
+                String[] strs = strings.get(i).split(" : ");
+                String s = strings.get(i);
+                String user = strs[0];
+                String status = strs[1];
+
+                table.getChildren().add(invCreateBox(user, status,pics.get(s)));
+            }
         }
+    }
+
+    private Pane invCreateBox (String user,String status,File pic){
+        Pane box = new Pane();
+
+        box.setMinHeight(Region.USE_PREF_SIZE);
+        box.setMaxHeight(Region.USE_PREF_SIZE);
+        box.setMinWidth(Region.USE_PREF_SIZE);
+        box.setMaxWidth(Region.USE_PREF_SIZE);
+
+        box.setPadding(new Insets(10,10,10,10));
+
+        box.getStyleClass().add("tableItem");
+
+        Text text = new Text(user);
+        text.getStyleClass().add("tableText");
+
+        Button button = new Button(status);
+
+        switch (status) {
+            case "Sent":
+            case "Member":
+                button.getStyleClass().add("InviteDis");
+                button.setDisable(true);
+                break;
+            case "Invite":
+                button.getStyleClass().add("invite");
+                break;
+        }
+
+        ImageView prof = new ImageView();
+        if (pic != null) {
+            prof.setImage(new Image(pic.toURI().toString()));
+        } else {
+            prof.setImage(defProf);
+        }
+
+        prof.setFitWidth(40);
+        prof.setFitHeight(40);
+
+        box.getChildren().add(text);
+        box.getChildren().add(button);
+        box.getChildren().add(prof);
+
+        text.setLayoutX(60);
+        text.setLayoutY(50);
+
+        button.setLayoutX(320);
+        button.setLayoutY(30);
+
+        prof.setLayoutX(10);
+        prof.setLayoutY(25);
+
+        if (status.equals("Invite")) {
+            button.setOnAction(actionEvent -> {
+                try {
+                    ui.methodWrite(user);
+                    button.setText("Sent");
+                    button.getStyleClass().clear();
+                    button.getStyleClass().add("InviteDis");
+                    button.setDisable(true);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
+
+        return box;
     }
 
     private Pane userCreateBox (String user, String status,File pic){

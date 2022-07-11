@@ -146,3 +146,27 @@
     -fx-pref-width: 20;
     -fx-pref-height: 20;
 }
+
+.InviteDis {
+    -fx-background-color: rgb(0,0,0,0);
+    -fx-background-radius: 7 7 7 7;
+    -fx-text-fill: White;
+    -fx-font-size: 15;
+    -fx-border-color: BLACK;
+    -fx-border-width: 1;
+    -fx-border-radius: 7 7 7 7;
+}
+
+.invite {
+    -fx-background-color: rgb(21, 112, 0);
+    -fx-background-radius: 7 7 7 7;
+    -fx-text-fill: White;
+    -fx-font-size: 15;
+    -fx-border-color: BLACK;
+    -fx-border-width: 1;
+    -fx-border-radius: 7 7 7 7;
+}
+
+.invite:hover {
+    -fx-background-color: rgb(15, 140, 0);
+}

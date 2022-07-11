@@ -3,9 +3,12 @@ package com.example.discordgui.controller;
 import com.example.discordgui.Command;
 import com.example.discordgui.UI;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 
@@ -52,5 +55,21 @@ public class SignUpController {
 
     public void init(UI ui){
         this.ui=ui;
+
+        EventHandler<KeyEvent> e = keyEvent -> {
+            if (keyEvent.getCode().equals(KeyCode.ENTER)){
+                try {
+                    signUp(null);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        };
+
+        email.setOnKeyPressed(e);
+        password.setOnKeyPressed(e);
+        passwordConfirm.setOnKeyPressed(e);
+        userName.setOnKeyPressed(e);
+        phone.setOnKeyPressed(e);
     }
 }

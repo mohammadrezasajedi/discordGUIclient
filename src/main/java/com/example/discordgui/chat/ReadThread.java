@@ -22,7 +22,29 @@ public class ReadThread implements Runnable{
         try {
             String str = methodRead();
             while (!str.equals(Command.EXITCHATMODE.getStr())){
-                chatPageController.newMessage(str);
+                if (str.contains("##")){
+                    String[] tokens = str.substring(2).split("-");
+
+                    switch (tokens[0]){
+                        case "like" : {
+                            chatPageController.like(Long.parseLong(tokens[1]),tokens[2]);
+                            break;
+                        }
+                        case "dislike" : {
+                            chatPageController.dislike(Long.parseLong(tokens[1]),tokens[2]);
+                            break;
+                        }
+                        case "laugh" : {
+                            chatPageController.laughter(Long.parseLong(tokens[1]),tokens[2]);
+                            break;
+                        }
+                    }
+                } else if (str.contains("$$")){
+                    chatPageController.addIsTyping(str.substring(2));
+                }
+                else {
+                    chatPageController.newMessage(str);
+                }
                 str = methodRead();
             }
         } catch (IOException e) {

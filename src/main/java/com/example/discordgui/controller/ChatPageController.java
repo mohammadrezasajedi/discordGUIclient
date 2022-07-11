@@ -11,20 +11,29 @@ import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Objects;
 
 public class ChatPageController {
 
     private UI ui;
     private ReadThread readThread;
+    private HashMap<Long,MessageController> messages;
+    private HashSet<String> isTypings;
 
 
     @FXML
@@ -38,6 +47,9 @@ public class ChatPageController {
 
     @FXML
     private Text name;
+
+    @FXML
+    private HBox istyping;
 
     @FXML
     void attach(ActionEvent event) throws IOException {
@@ -82,6 +94,27 @@ public class ChatPageController {
         sendCommand("#getpm");
     }
 
+    @FXML
+    void typing(KeyEvent event) throws IOException {
+        if (event.getCode().equals(KeyCode.ENTER)){
+            send(null);
+        } else {
+            ui.methodWrite("$");
+        }
+    }
+
+    public void like (Long id,String user){
+        messages.get(id).addLike(user);
+    }
+
+    public void dislike (Long id,String user){
+        messages.get(id).addDislike(user);
+    }
+
+    public void laughter (Long id,String user){
+        messages.get(id).addLaughter(user);
+    }
+
     public void sendCommand(String str) throws IOException {
         ui.methodWrite(str);
     }
@@ -113,6 +146,8 @@ public class ChatPageController {
         }
         this.name.setText(name);
         readThread = new ReadThread(ui,this);
+        messages = new HashMap<>();
+        isTypings = new HashSet<>();
     }
 
     public void start() {
@@ -120,11 +155,49 @@ public class ChatPageController {
     }
 
     public void newMessage (String str) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Client.class.getResource("FXML/Message.fxml"));
-        BorderPane pane = fxmlLoader.load();
-        MessageController messageController = fxmlLoader.getController();
-        messageController.init(str,this);
-        Platform.runLater(() -> chat.getChildren().add(pane));
+        if (str.charAt(0) == '|'){
+            TextFlow f = new TextFlow();
+            f.setMinHeight(Region.USE_PREF_SIZE);
+            f.setMaxHeight(Region.USE_PREF_SIZE);
+            f.setMinWidth(Region.USE_PREF_SIZE);
+            f.setMaxWidth(Region.USE_PREF_SIZE);
+
+            f.prefHeight(50);
+            f.prefWidth(100);
+
+            Text text = new Text(str.substring(1));
+            text.setStyle("-fx-font-size: 18; -fx-fill: GREY");
+
+            f.getChildren().add(text);
+            Platform.runLater(() -> chat.getChildren().add(f));
+        } else {
+            FXMLLoader fxmlLoader = new FXMLLoader(Client.class.getResource("FXML/Message.fxml"));
+            BorderPane pane = fxmlLoader.load();
+            MessageController messageController = fxmlLoader.getController();
+            messageController.init(str, this);
+            messages.put(messageController.getId(), messageController);
+            Platform.runLater(() -> chat.getChildren().add(pane));
+        }
+    }
+
+
+    public void addIsTyping (String str) {
+        if (!isTypings.contains(str)) {
+            Text text = new Text(str + ",");
+            text.getStyleClass().add("notif");
+            Thread thread = new Thread(() -> {
+                try {
+                    isTypings.add(str);
+                    Platform.runLater(() -> istyping.getChildren().add(text));
+                    Thread.sleep(1000);
+                    Platform.runLater(() -> istyping.getChildren().remove(text));
+                    isTypings.remove(str);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            thread.start();
+        }
     }
 
 
