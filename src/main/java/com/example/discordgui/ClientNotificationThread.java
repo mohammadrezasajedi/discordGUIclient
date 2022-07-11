@@ -1,12 +1,17 @@
 package com.example.discordgui;
 
 import com.example.discordgui.controller.PopUpController;
+import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
+import javafx.animation.Interpolator;
+import javafx.animation.Transition;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 import java.io.*;
 import java.net.Socket;
@@ -52,13 +57,27 @@ public class ClientNotificationThread implements Runnable{
         AtomicReference<Stage> stage = new AtomicReference<>();
         Platform.runLater(() -> {
             stage.set(new Stage());
-            stage.get().setX(Screen.getPrimary().getVisualBounds().getMinX() + Screen.getPrimary().getVisualBounds().getWidth() - 400);
+            stage.get().setX(Screen.getPrimary().getVisualBounds().getMinX() + Screen.getPrimary().getVisualBounds().getWidth());
             stage.get().setY(Screen.getPrimary().getVisualBounds().getMinY() + Screen.getPrimary().getVisualBounds().getHeight() - 150);
             stage.get().initStyle(StageStyle.UNDECORATED);
             stage.get().setAlwaysOnTop(true);
             stage.get().setScene(scene);
             stage.get().show();
         });
+
+        Animation transition = new Transition() {
+            @Override
+            protected void interpolate(double v) {
+                stage.get().setX(stage.get().getX() - 9);
+            }
+
+            {
+                setCycleDuration(Duration.millis(400));
+                setInterpolator(Interpolator.EASE_IN);
+            }
+        };
+        transition.play();
+
         Thread.sleep(5*1000);
         Platform.runLater(() -> {
             stage.get().close();

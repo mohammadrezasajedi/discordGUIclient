@@ -106,7 +106,7 @@
          <children>
             <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="450.0" styleClass="ChatBackGround">
                <content>
-                  <VBox fx:id="chat" alignment="TOP_CENTER" prefHeight="465.0" prefWidth="435.0" spacing="10.0" styleClass="ChatBackGround" />
+                  <VBox fx:id="chat" alignment="TOP_CENTER" prefHeight="465.0" prefWidth="434.0" spacing="10.0" styleClass="ChatBackGround" />
                </content>
             </ScrollPane>
             <HBox fx:id="istyping" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="450.0">

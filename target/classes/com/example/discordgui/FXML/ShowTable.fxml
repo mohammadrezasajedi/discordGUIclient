@@ -29,7 +29,7 @@
                   <Insets />
                </VBox.margin>
                <content>
-                  <VBox fx:id="table" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="435.0" spacing="10.0" styleClass="menuBackGround">
+                  <VBox fx:id="table" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="434.0" spacing="10.0" styleClass="menuBackGround">
                      <padding>
                         <Insets bottom="10.0" top="10.0" />
                      </padding></VBox>
